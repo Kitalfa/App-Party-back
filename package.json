@@ -1,0 +1,24 @@
+{
+  "name": "projet-08-party-back",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/O-clock-Ohm/projet-08-party-back.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/O-clock-Ohm/projet-08-party-back/issues"
+  },
+  "homepage": "https://github.com/O-clock-Ohm/projet-08-party-back#readme",
+  "dependencies": {
+    "pg": "^8.10.0",
+    "sequelize": "^6.31.0"
+  }
+}
