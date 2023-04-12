@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
 });
 
 /** Event **/
-// router.get('/event', eventController.getOneEvent);
+// router.get('/event', eventController.getAllEvent);
 // router.get('/event/:id', eventController.getOneevent);
 // router.post('/event', eventController.createEvent);
 // router.put('/event/:id', eventController.modifyEvent);
