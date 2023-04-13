@@ -11,7 +11,7 @@ Event.init(
     address: DataTypes.STRING(64),
     city: DataTypes.STRING(64),
     postal: DataTypes.INTEGER,
-    image: DataTypes.STRING(80),
+    image: DataTypes.TEXT,
   },
   {
     sequelize,

@@ -5,11 +5,7 @@ class Category extends Model {}
 
 Category.init(
   {
-    drink: DataTypes.STRING(64),
-    food: DataTypes.STRING(64),
-    instrument: DataTypes.STRING(64),
-    gift: DataTypes.STRING(64),
-    other: DataTypes.STRING(64),
+    name: DataTypes.STRING(64),
   },
   {
     sequelize,

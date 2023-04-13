@@ -20,10 +20,10 @@ router.get('/', (req, res) => {
 
 /** Event **/
 // router.get('/event', eventController.getAllEvent);
-// router.get('/event/:id', eventController.getOneevent);
-// router.post('/event', eventController.createEvent);
-// router.put('/event/:id', eventController.modifyEvent);
-// router.delete('/event/:id', eventController.deleteEvent);
+router.get('/event/:id', eventController.getOneEvent);
+router.post('/event', eventController.createEvent);
+router.put('/event/:id', eventController.modifyEvent);
+router.delete('/event/:id', eventController.deleteEvent);
 
 // /** Event > User **/
 // router.get('/event/:id/users', eventUserController.getUsersEvent);

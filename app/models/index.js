@@ -11,12 +11,12 @@ const User = require('./User');
 
 // User <-> Event (One-To-Many)
 User.hasMany(Event, {
-  foreignKey: 'user_mail',
+  foreignKey: 'user_id',
   as: 'events',
 });
 
 Event.belongsTo(User, {
-  foreignKey: 'user_mail',
+  foreignKey: 'user_id',
   as: 'user',
 });
 
@@ -33,19 +33,19 @@ Item.belongsTo(Event, {
 
 // User <-> Item (One-To-Many)
 User.hasMany(Item, {
-  foreignKey: 'user_mail',
-  as: 'items',
+  foreignKey: 'user_id',
+  as: 'itemsUser',
 });
 
 Item.belongsTo(User, {
-  foreignKey: 'user_mail',
+  foreignKey: 'user_id',
   as: 'user',
 });
 
 // Category <-> Item (One-To-Many)
 Category.hasMany(Item, {
   foreignKey: 'category_id',
-  as: 'items',
+  as: 'itemsCategory',
 });
 
 Item.belongsTo(Category, {
@@ -55,9 +55,9 @@ Item.belongsTo(Category, {
 
 // User <-> Event (Many-To-Many)
 User.belongsToMany(Event, {
-  foreignKey: 'user_mail',
+  foreignKey: 'user_id',
   otherKey: 'event_id',
-  as: 'events',
+  as: 'eventsUser',
   through: 'user_has_event',
 });
 

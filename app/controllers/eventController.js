@@ -17,7 +17,8 @@ const eventController = {
 
   createEvent: async (req, res) => {
     try {
-      const { title, date, description, adresse, image } = req.body;
+      const { title, date, description, address, city, postal, image } =
+        req.body;
 
       let bodyErrors = [];
       if (!title) {
@@ -29,8 +30,14 @@ const eventController = {
       if (!description) {
         bodyErrors.push(`description can not be empty`);
       }
-      if (!adresse) {
-        bodyErrors.push(`adresse can not be empty`);
+      if (!address) {
+        bodyErrors.push(`address can not be empty`);
+      }
+      if (!city) {
+        bodyErrors.push(`city can not be empty`);
+      }
+      if (!postal) {
+        bodyErrors.push(`postal can not be empty`);
       }
       if (!image) {
         bodyErrors.push(`image can not be empty`);
@@ -43,7 +50,9 @@ const eventController = {
           title,
           date,
           description,
-          adresse,
+          address,
+          city,
+          postal,
           image,
         });
 
@@ -59,7 +68,8 @@ const eventController = {
   modifyEvent: async (req, res) => {
     try {
       const eventId = req.params.id;
-      const { title, date, description, adresse, image } = req.body;
+      const { title, date, description, address, city, postal, image } =
+        req.body;
 
       let event = await Event.findByPk(eventId);
       if (!event) {
@@ -74,8 +84,14 @@ const eventController = {
         if (description) {
           event.description = description;
         }
-        if (adresse) {
-          event.adresse = adresse;
+        if (address) {
+          event.address = address;
+        }
+        if (city) {
+          event.city = city;
+        }
+        if (postal) {
+          event.postal = postal;
         }
         if (image) {
           event.image = image;

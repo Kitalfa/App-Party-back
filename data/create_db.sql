@@ -54,8 +54,8 @@ CREATE TABLE "event" (
   "postal" INTEGER NOT NULL DEFAULT 0,
   "image" TEXT NOT NULL DEFAULT '',
   -- si l'on veut pouvoir supprimer une event qui contient des items, on est obligé de rajouter "ON DELETE CASCADE" qui aura pour conséquence de supprimer toutes les items qui font référence à l'event.
-  "item_id" INTEGER NOT NULL REFERENCES "item"(id) ON DELETE CASCADE,
-  "user_id" INTEGER NOT NULL REFERENCES "user"(id) ON DELETE CASCADE,
+  "item_id" INTEGER  REFERENCES "item"(id) ON DELETE CASCADE,
+  "user_id" INTEGER  REFERENCES "user"(id) ON DELETE CASCADE,
   "created_at" TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   "updated_at" TIMESTAMPTZ
 );
