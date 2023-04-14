@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
 });
 
 /** Event **/
-// router.get('/event', eventController.getAllEvent);
+router.get('/event', eventController.getAllEvent);
 router.get('/event/:id', eventController.getOneEvent);
 router.post('/event', eventController.createEvent);
 router.put('/event/:id', eventController.modifyEvent);
@@ -28,7 +28,7 @@ router.delete('/event/:id', eventController.deleteEvent);
 // /** Event > User **/
 // router.get('/event/:id/users', eventUserController.getUsersEvent);
 // router.post('/event/:id/users', eventUserController.addUserEvent);
-// router.delete('/event/:id/users/:mail', eventUserController.deleteUserEvent);
+// router.delete('/event/:id/users/:id', eventUserController.deleteUserEvent);
 
 // /** Event > Item **/
 // router.get('/event/:id/item', eventItemController.getItemEvent);
@@ -37,10 +37,10 @@ router.delete('/event/:id', eventController.deleteEvent);
 // router.delete('/event/:id/item/:id', eventItemController.deleteItemEvent);
 
 // /**  User **/
-// router.get('/user/:mail', userController.getOneUser);
+// router.get('/user/:id', userController.getOneUser);
 // router.post('/user', userController.createUser);
-// router.put('/user/:mail', userController.modifyUser);
-// router.delete('/user/:mail', userController.deleteUser);
+// router.put('/user/:id', userController.modifyUser);
+// router.delete('/user/:id', userController.deleteUser);
 
 // /**  Item **/
 // router.get('/item/:id', itemController.getOneItem);

@@ -15,10 +15,31 @@ const eventController = {
     }
   },
 
+  getAllEvent: async (req, res) => {
+    try {
+      const event = await Event.findAll();
+      if (!event) {
+        res.status(404).json('Cant find event API');
+      } else {
+        res.status(200).json(event);
+      }
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
+
   createEvent: async (req, res) => {
     try {
-      const { title, date, description, address, city, postal, image } =
-        req.body;
+      const {
+        title,
+        date,
+        description,
+        address,
+        city,
+        postal,
+        image,
+        user_id,
+      } = req.body;
 
       let bodyErrors = [];
       if (!title) {
@@ -42,6 +63,9 @@ const eventController = {
       if (!image) {
         bodyErrors.push(`image can not be empty`);
       }
+      if (!user_id) {
+        bodyErrors.push(`user_id can not be empty`);
+      }
 
       if (bodyErrors.length) {
         res.status(400).json(bodyErrors);
@@ -54,6 +78,7 @@ const eventController = {
           city,
           postal,
           image,
+          user_id,
         });
 
         await newEvent.save();
@@ -113,7 +138,7 @@ const eventController = {
         res.status(404).json(`Cant find event with id ${eventId}`);
       } else {
         await event.destroy();
-        res.json('ok');
+        res.status(204).json('ok');
       }
     } catch (error) {
       console.trace(error);
