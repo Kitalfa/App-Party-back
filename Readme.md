@@ -1,7 +1,10 @@
 # Server Party
 
-- install `yarn`
-- start `yarn start` : <http://localhost:3000>
+- Installer les dépendances : `npm install`
+- Creer une bdd avec postgres **party** avec un user **party**,
+- Script pour reset les tables de la database `npm run db:reset`
+- Script pour reset inserer des données tests dans la database `npm db:populate`
+- Lancer le serveur : `npm start` => <http://localhost:3000>
 
 ## Routes
 

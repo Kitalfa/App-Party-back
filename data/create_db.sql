@@ -30,19 +30,7 @@ CREATE TABLE "category" (
   "updated_at" TIMESTAMPTZ
 );
 
-/* 3ème table : Item */
-
-CREATE TABLE "item" (
-  "id" INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  "name" VARCHAR(64) NOT NULL DEFAULT '',
-  "quantity" INTEGER NOT NULL DEFAULT 0,
-  "user_id" INTEGER NOT NULL REFERENCES "user"(id) ON DELETE CASCADE,
-  "category_id" INTEGER NOT NULL REFERENCES "category"(id) ON DELETE CASCADE,    
-  "created_at" TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-  "updated_at" TIMESTAMPTZ
-);
-
-/* 4ème table : Event */
+/* 3ème table : Event */
 
 CREATE TABLE "event" (
   "id" INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
@@ -52,13 +40,26 @@ CREATE TABLE "event" (
   "address" VARCHAR(64) NOT NULL DEFAULT '',
   "city" VARCHAR(64) NOT NULL DEFAULT '',
   "postal" INTEGER NOT NULL DEFAULT 0,
-  "image" TEXT NOT NULL DEFAULT '',
-  -- si l'on veut pouvoir supprimer une event qui contient des items, on est obligé de rajouter "ON DELETE CASCADE" qui aura pour conséquence de supprimer toutes les items qui font référence à l'event.
-  "item_id" INTEGER  REFERENCES "item"(id) ON DELETE CASCADE,
+  "image" TEXT NOT NULL DEFAULT '',  
   "user_id" INTEGER  REFERENCES "user"(id) ON DELETE CASCADE,
   "created_at" TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   "updated_at" TIMESTAMPTZ
 );
+
+/* 4ème table : Item */
+
+CREATE TABLE "item" (
+  "id" INTEGER GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  "name" VARCHAR(64) NOT NULL DEFAULT '',
+  "quantity" INTEGER NOT NULL DEFAULT 0,
+  "user_id" INTEGER NOT NULL REFERENCES "user"(id) ON DELETE CASCADE,
+  "category_id" INTEGER NOT NULL REFERENCES "category"(id) ON DELETE CASCADE,
+  "event_id" INTEGER NOT NULL REFERENCES "event"(id) ON DELETE CASCADE,    
+  "created_at" TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  "updated_at" TIMESTAMPTZ
+);
+
+
 
 
 
