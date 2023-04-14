@@ -15,6 +15,7 @@ const PORT = process.env.PORT || 3000;
 const app = express();
 
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 /* ---------- Middlewares ---------- */
 app.use(cors('*')); // On autorise tout les domaines à faire du Cross Origin Resource Sharing.
@@ -25,6 +26,7 @@ app.use(router);
 app.use(express.static('assets'));
 
 app.use(middlewares.notFoundMiddleware);
+app.use(middlewares.authenticateToken);
 
 /* ---------- App ---------- */
 

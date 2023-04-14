@@ -2,6 +2,7 @@ const express = require('express');
 const path = require('path');
 /* -------------- Controllers -------------- */
 
+const userAuthController = require('./controllers/userAuthController');
 const eventController = require('./controllers/eventController');
 const eventUserController = require('./controllers/eventUserController');
 const eventItemController = require('./controllers/eventItemController');
@@ -11,12 +12,6 @@ const itemController = require('./controllers/itemController');
 /* -------------- Routes -------------- */
 
 const router = express.Router();
-
-router.get('/', (req, res) => {
-  console.log(__dirname);
-  let filePath = path.join(__dirname, '../assets/index.html');
-  res.sendFile(filePath);
-});
 
 /** Event **/
 router.get('/event', eventController.getAllEvent);
@@ -47,5 +42,10 @@ router.delete('/event/:id', eventController.deleteEvent);
 // router.post('/item', itemController.createItem);
 // router.put('/item/:id', itemController.modifyItem);
 // router.delete('/item/:id', itemController.deleteItem);
+
+/** Authentification */
+
+router.post('/signup', userAuthController.handleSignupFormSubmission);
+router.post('/login', userAuthController.handleLoginFormSubmission);
 
 module.exports = router;
