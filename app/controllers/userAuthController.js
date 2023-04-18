@@ -62,14 +62,14 @@ const userAuthController = {
     //Plan d'action
     //Vérifier que les champs ne soient pas nuls
     if (!mail || !password) {
-      return res.status(401).send('Veuillez renseigner tous les champs');
+      return res.status(401).json('Veuillez renseigner tous les champs');
     }
     //Trouver dans la BDD un email qui correspond à l'email fourni dans le form par l'utilisateur
     const user = await User.findOne({ where: { mail } });
     if (!user) {
       return res
         .status(401)
-        .send('La paire utilisateur/mot de passe est invalide');
+        .json('La paire utilisateur/mot de passe est invalide');
     }
     //Comparer le mot de passe avec le hash dans la BDD
     const isMatchingPassword = await bcrypt.compare(password, user.password);
@@ -77,13 +77,13 @@ const userAuthController = {
     if (!isMatchingPassword) {
       return res
         .status(401)
-        .send('La paire utilisateur/mot de passe est invalide');
+        .json('La paire utilisateur/mot de passe est invalide');
     }
 
     //Il va falloir envoyer un JWT
     const accessToken = generateAccessToken(user);
     console.log('accessToken', accessToken);
-    res.send({
+    res.json({
       accessToken,
     });
   },

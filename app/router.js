@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const { authenticateToken } = require('./middlewares');
 /* -------------- Controllers -------------- */
 
 const userAuthController = require('./controllers/userAuthController');
@@ -14,6 +15,12 @@ const itemController = require('./controllers/itemController');
 const router = express.Router();
 
 /** Event **/
+// router.get('/event', authenticateToken, eventController.getAllEvent);
+// router.get('/event/:id', authenticateToken, eventController.getOneEvent);
+// router.post('/event', authenticateToken, eventController.createEvent);
+// router.put('/event/:id', authenticateToken, eventController.modifyEvent);
+// router.delete('/event/:id', authenticateToken, eventController.deleteEvent);
+
 router.get('/event', eventController.getAllEvent);
 router.get('/event/:id', eventController.getOneEvent);
 router.post('/event', eventController.createEvent);

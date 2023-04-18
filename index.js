@@ -8,7 +8,7 @@ const express = require('express');
 const router = require('./app/router');
 const cors = require('cors');
 const multer = require('multer');
-const bodyParser = multer();
+// const bodyParser = multer();
 const middlewares = require('./app/middlewares');
 
 const PORT = process.env.PORT || 3000;
@@ -19,14 +19,13 @@ app.use(express.urlencoded({ extended: true }));
 
 /* ---------- Middlewares ---------- */
 app.use(cors('*')); // On autorise tout les domaines à faire du Cross Origin Resource Sharing.
-app.use(bodyParser.none());
+// app.use(bodyParser.none());
 app.use(middlewares.bodySanitizer);
 app.use(router);
 
 app.use(express.static('assets'));
 
 app.use(middlewares.notFoundMiddleware);
-app.use(middlewares.authenticateToken);
 
 /* ---------- App ---------- */
 
