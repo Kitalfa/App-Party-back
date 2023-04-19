@@ -71,17 +71,22 @@ const userAuthController = {
         .status(401)
         .json('La paire utilisateur/mot de passe est invalide');
     }
+
     //Comparer le mot de passe avec le hash dans la BDD
     const isMatchingPassword = await bcrypt.compare(password, user.password);
     //Condition : Si le hash et le mdp ne correspondent pas, on retourne une erreur sur la view
     if (!isMatchingPassword) {
-      return res
-        .status(401)
-        .json('La paire utilisateur/mot de passe est invalide');
+      return res.status(401).json('Mot de passe est invalide');
     }
 
     //Il va falloir envoyer un JWT
-    const accessToken = generateAccessToken(user);
+    const payload = {
+      id: user.id,
+      firstname: user.firstname,
+      lastname: user.lastname,
+      mail: user.mail,
+    };
+    const accessToken = generateAccessToken(payload);
     console.log('accessToken', accessToken);
     res.json({
       accessToken,

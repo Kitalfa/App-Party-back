@@ -1,8 +1,8 @@
 /* une fois les tables crées, on va les remplir */
 
 INSERT INTO "user" ("mail", "lastname", "firstname", "password")
-VALUES ('party@party.fr', 'Tvs', 'Dorian', '123456' );
-VALUES ('party2@party2.fr', 'Dedieu', 'Vincent', '123456' );
+VALUES ('party@party.fr', 'Tvs', 'Dorian', '$2b$10$h/QRLFlOHDw9JFZJcswSUelk6rm7nkZUS/NwsDh./DBvJOIjgLpcy' );
+VALUES ('party2@party2.fr', 'Dedieu', 'Vincent', '$2b$10$h/QRLFlOHDw9JFZJcswSUelk6rm7nkZUS/NwsDh./DBvJOIjgLpcy' );
 
 INSERT INTO "category" ("name")
 VALUES ('drink');
