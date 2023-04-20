@@ -39,16 +39,18 @@ router.delete('/event/:id', authenticateToken, eventController.deleteEvent);
 // router.delete('/event/:id/item/:id', eventItemController.deleteItemEvent);
 
 // /**  User **/
-// router.get('/user/:id', userController.getOneUser);
-// router.post('/user', userController.createUser);
-// router.put('/user/:id', userController.modifyUser);
-// router.delete('/user/:id', userController.deleteUser);
+router.get('/user', userController.getAllUser);
+router.get('/user/:id', userController.getOneUser);
+router.post('/user', userController.createUser);
+router.put('/user/:id', userController.modifyUser);
+router.delete('/user/:id', userController.deleteUser);
 
 // /**  Item **/
-// router.get('/item/:id', itemController.getOneItem);
-// router.post('/item', itemController.createItem);
-// router.put('/item/:id', itemController.modifyItem);
-// router.delete('/item/:id', itemController.deleteItem);
+router.get('/item/:id', itemController.getOneItem);
+router.get('/item', itemController.getAllItem);
+router.post('/item', itemController.createItem);
+router.put('/item/:id', itemController.modifyItem);
+router.delete('/item/:id', itemController.deleteItem);
 
 /** Authentification */
 

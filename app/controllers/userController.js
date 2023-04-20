@@ -4,7 +4,7 @@ const userController = {
   getOneUser: async (req, res) => {
     try {
       const userId = req.params.id;
-      const user = await User.findByPk(UserId);
+      const user = await User.findByPk(userId);
       if (!user) {
         res.status(404).json('Cant find User with id ' + userId);
       } else {
@@ -75,19 +75,19 @@ const userController = {
         res.status(404).json(`Cant find User with id ${userId}`);
       } else {
         if (mail) {
-          User.mail = mail;
+          user.mail = mail;
         }
         if (lastname) {
-          User.lastname = lastname;
+          user.lastname = lastname;
         }
         if (firstname) {
-          User.firstname = firstname;
+          user.firstname = firstname;
         }
         if (password) {
-          User.password = password;
+          user.password = password;
         }
 
-        await User.save();
+        await user.save();
         res.json(user);
       }
     } catch (error) {
@@ -98,12 +98,12 @@ const userController = {
 
   deleteUser: async (req, res) => {
     try {
-      const UserId = req.params.id;
-      let user = await User.findByPk(UserId);
+      const userId = req.params.id;
+      let user = await User.findByPk(userId);
       if (!user) {
-        res.status(404).json(`Cant find User with id ${UserId}`);
+        res.status(404).json(`Cant find User with id ${userId}`);
       } else {
-        await User.destroy();
+        await user.destroy();
         res.json('ok');
       }
     } catch (error) {

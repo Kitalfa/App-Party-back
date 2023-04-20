@@ -30,7 +30,7 @@ const itemController = {
 
   createItem: async (req, res) => {
     try {
-      const { name, quantity } = req.body;
+      const { name, quantity, event_id, user_id, category_id } = req.body;
 
       let bodyErrors = [];
       if (!name) {
@@ -39,6 +39,15 @@ const itemController = {
       if (!quantity) {
         bodyErrors.push(`quantity can not be empty`);
       }
+      if (!event_id) {
+        bodyErrors.push(`event_id can not be empty`);
+      }
+      if (!user_id) {
+        bodyErrors.push(`user_id can not be empty`);
+      }
+      if (!category_id) {
+        bodyErrors.push(`category_id can not be empty`);
+      }
 
       if (bodyErrors.length) {
         res.status(400).json(bodyErrors);
@@ -46,6 +55,9 @@ const itemController = {
         let newItem = Item.build({
           name,
           quantity,
+          event_id,
+          user_id,
+          category_id,
         });
 
         await newItem.save();
@@ -72,7 +84,7 @@ const itemController = {
         if (quantity) {
           item.quantity = quantity;
         }
-        await Item.save();
+        await item.save();
         res.json(item);
       }
     } catch (error) {
@@ -84,11 +96,11 @@ const itemController = {
   deleteItem: async (req, res) => {
     try {
       const itemId = req.params.id;
-      let item = await item.findByPk(itemId);
+      let item = await Item.findByPk(itemId);
       if (!item) {
         res.status(404).json(`Cant find item with id ${itemId}`);
       } else {
-        await Item.destroy();
+        await item.destroy();
         res.json('ok');
       }
     } catch (error) {
