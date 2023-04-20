@@ -15,17 +15,17 @@ const itemController = require('./controllers/itemController');
 const router = express.Router();
 
 /** Event **/
-// router.get('/event', authenticateToken, eventController.getAllEvent);
-// router.get('/event/:id', authenticateToken, eventController.getOneEvent);
-// router.post('/event', authenticateToken, eventController.createEvent);
-// router.put('/event/:id', authenticateToken, eventController.modifyEvent);
-// router.delete('/event/:id', authenticateToken, eventController.deleteEvent);
+router.get('/event', authenticateToken, eventController.getAllEvent);
+router.get('/event/:id', authenticateToken, eventController.getOneEvent);
+router.post('/event', authenticateToken, eventController.createEvent);
+router.put('/event/:id', authenticateToken, eventController.modifyEvent);
+router.delete('/event/:id', authenticateToken, eventController.deleteEvent);
 
-router.get('/event', eventController.getAllEvent);
-router.get('/event/:id', eventController.getOneEvent);
-router.post('/event', eventController.createEvent);
-router.put('/event/:id', eventController.modifyEvent);
-router.delete('/event/:id', eventController.deleteEvent);
+// router.get('/event', eventController.getAllEvent);
+// router.get('/event/:id', eventController.getOneEvent);
+// router.post('/event', eventController.createEvent);
+// router.put('/event/:id', eventController.modifyEvent);
+// router.delete('/event/:id', eventController.deleteEvent);
 
 // /** Event > User **/
 // router.get('/event/:id/users', eventUserController.getUsersEvent);
