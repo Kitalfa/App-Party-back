@@ -90,6 +90,7 @@ const userAuthController = {
     console.log('accessToken', accessToken);
     res.json({
       accessToken,
+      payload,
     });
   },
 };

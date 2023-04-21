@@ -1,15 +1,17 @@
 /* une fois les tables crées, on va les remplir */
 
 INSERT INTO "user" ("mail", "lastname", "firstname", "password")
-VALUES ('party@party.fr', 'Tvs', 'Dorian', '$2b$10$h/QRLFlOHDw9JFZJcswSUelk6rm7nkZUS/NwsDh./DBvJOIjgLpcy' );
-VALUES ('party2@party2.fr', 'Dedieu', 'Vincent', '$2b$10$h/QRLFlOHDw9JFZJcswSUelk6rm7nkZUS/NwsDh./DBvJOIjgLpcy' );
+VALUES 
+('party@party.fr', 'Tvs', 'Dorian', '$2b$10$h/QRLFlOHDw9JFZJcswSUelk6rm7nkZUS/NwsDh./DBvJOIjgLpcy' ),
+('party2@party2.fr', 'Dedieu', 'Vincent', '$2b$10$h/QRLFlOHDw9JFZJcswSUelk6rm7nkZUS/NwsDh./DBvJOIjgLpcy' );
 
 INSERT INTO "category" ("name")
-VALUES ('drink');
-VALUES ('food');
-VALUES ('instrument');
-VALUES ('gift');
-VALUES ('other');
+VALUES 
+('drink'),
+('food'),
+('instrument'),
+('gift'),
+('other');
 
        
 
@@ -20,10 +22,12 @@ VALUES ('Bringue', '2023-05-05', 'On va se faire une grosse bringue pour fêter 
 
 
 INSERT INTO "item" ("name", "quantity", "user_id", "category_id", "event_id")
-VALUES ('Biere', 10, 1, 1, 1);
-VALUES ('Vin rouge', 2, 1, 1, 1);
+VALUES 
+('Biere', 10, 1, 1, 1),
+('Vin rouge', 2, 1, 1, 1);
 
 -- et on oublie pas la table de liaison !
 INSERT INTO "event_has_user" ("event_id", "user_id")
-VALUES (1,1);
-VALUES (1,2);
+VALUES 
+(1,1),
+(1,2);
