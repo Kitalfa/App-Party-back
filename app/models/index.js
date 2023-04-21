@@ -2,6 +2,8 @@ const Event = require('./Event');
 const Item = require('./Item');
 const Category = require('./Category');
 const User = require('./User');
+const UserEvent = require('./UserEvent');
+const sequelize = require('../db');
 
 /* Associations */
 
@@ -23,12 +25,10 @@ Event.belongsTo(User, {
 // Event <-> Item (One-To-Many)
 Event.hasMany(Item, {
   foreignKey: 'event_id',
-  as: 'items',
 });
 
 Item.belongsTo(Event, {
   foreignKey: 'event_id',
-  as: 'event',
 });
 
 // User <-> Item (One-To-Many)
@@ -54,18 +54,25 @@ Item.belongsTo(Category, {
 });
 
 // User <-> Event (Many-To-Many)
-User.belongsToMany(Event, {
-  foreignKey: 'user_id',
-  otherKey: 'event_id',
-  as: 'eventsUser',
-  through: 'user_has_event',
-});
+User.belongsToMany(
+  Event,
+  { through: UserEvent }
+  // foreignKey: 'user_id',
+  // otherKey: 'event_id',
+  // foreignKey: 'event_id',
+  // otherKey: 'user_id',
+  // as: 'eventsUser',
+);
 
-Event.belongsToMany(User, {
-  foreignKey: 'event_id',
-  otherKey: 'user_id',
-  as: 'users',
-  through: 'user_has_event',
-});
+Event.belongsToMany(
+  User,
+  { through: UserEvent }
+  // foreignKey: 'event_id',
+  // otherKey: 'user_id',
+  // foreignKey: 'user_id',
+  // otherKey: 'event_id',
+
+  // as: 'users',
+);
 
 module.exports = { User, Item, Category, Event };

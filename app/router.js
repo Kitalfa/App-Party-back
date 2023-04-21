@@ -15,28 +15,29 @@ const itemController = require('./controllers/itemController');
 const router = express.Router();
 
 /** Event **/
-router.get('/event', authenticateToken, eventController.getAllEvent);
-router.get('/event/:id', authenticateToken, eventController.getOneEvent);
-router.post('/event', authenticateToken, eventController.createEvent);
-router.put('/event/:id', authenticateToken, eventController.modifyEvent);
-router.delete('/event/:id', authenticateToken, eventController.deleteEvent);
+// router.get('/event', authenticateToken, eventController.getAllEvent);
+// router.get('/event/:id', authenticateToken, eventController.getOneEvent);
+// router.post('/event', authenticateToken, eventController.createEvent);
+// router.put('/event/:id', authenticateToken, eventController.modifyEvent);
+// router.delete('/event/:id', authenticateToken, eventController.deleteEvent);
 
-// router.get('/event', eventController.getAllEvent);
-// router.get('/event/:id', eventController.getOneEvent);
-// router.post('/event', eventController.createEvent);
-// router.put('/event/:id', eventController.modifyEvent);
-// router.delete('/event/:id', eventController.deleteEvent);
+router.get('/event', eventController.getAllEvent);
+router.get('/event/:id', eventController.getOneEvent);
+router.post('/event', eventController.createEvent);
+router.put('/event/:id', eventController.modifyEvent);
+router.delete('/event/:id', eventController.deleteEvent);
 
 // /** Event > User **/
-// router.get('/event/:id/users', eventUserController.getUsersEvent);
-// router.post('/event/:id/users', eventUserController.addUserEvent);
-// router.delete('/event/:id/users/:id', eventUserController.deleteUserEvent);
+router.get('/event/:eventId/users', eventUserController.getUsersEvent);
+router.post('/event/:eventId/users', eventUserController.addUserEvent);
+router.delete(
+  '/event/:eventId/users/:userId',
+  eventUserController.deleteUserEvent
+);
 
 // /** Event > Item **/
-// router.get('/event/:id/item', eventItemController.getItemEvent);
-// router.post('/event/:id/item', eventItemController.addItemEvent);
-// router.put('/event/:id/item/:id', eventItemController.modifyItemEvent);
-// router.delete('/event/:id/item/:id', eventItemController.deleteItemEvent);
+router.get('/event/:eventId/item', eventItemController.getItemEvent);
+router.post('/event/:eventId/item', eventItemController.addItemEvent);
 
 // /**  User **/
 router.get('/user', userController.getAllUser);
