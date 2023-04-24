@@ -42,6 +42,7 @@ CREATE TABLE "event" (
   "postal" INTEGER NOT NULL DEFAULT 0,
   "image" TEXT NOT NULL DEFAULT '',  
   "user_id" INTEGER  REFERENCES "user"(id) ON DELETE CASCADE,
+  "password" VARCHAR(64) DEFAULT '',
   "created_at" TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   "updated_at" TIMESTAMPTZ
 );
