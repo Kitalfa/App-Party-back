@@ -6,7 +6,7 @@ const schema = new passwordValidator();
 // Add properties to it
 schema
   .is()
-  .min(8) // Minimum length 6
+  .min(6) // Minimum length 6
   .is()
   .max(100); // Maximum length 100
 
