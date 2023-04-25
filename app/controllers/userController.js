@@ -1,4 +1,4 @@
-const { User } = require('../models');
+const { User, Event } = require('../models');
 
 const userController = {
   getOneUser: async (req, res) => {
@@ -108,6 +108,20 @@ const userController = {
       }
     } catch (error) {
       console.trace(error);
+      res.status(500).json(error);
+    }
+  },
+
+  getEventsUser: async (req, res) => {
+    try {
+      const userId = req.params.userId;
+      const user = await User.findByPk(userId, { include: Event });
+      if (!user) {
+        res.status(404).json('Cant find event with id ' + userId);
+      } else {
+        res.json(user);
+      }
+    } catch (error) {
       res.status(500).json(error);
     }
   },
