@@ -23,7 +23,7 @@ const eventUserController = {
 
       const userEvent = await UserEvent.findOne({
          where: {
-            user_id: req.user.id,
+            user_id: userId,
             event_id: eventId,
          },
       });

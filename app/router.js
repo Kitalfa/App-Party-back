@@ -56,7 +56,7 @@ router.delete("/user/:id", userController.deleteUser);
 // /**  Item **/
 router.get("/item/:id", itemController.getOneItem);
 router.get("/item", itemController.getAllItem);
-router.post("/item", itemController.createItem);
+router.post("/item", authenticateToken, itemController.createItem);
 router.put("/item/:id", itemController.modifyItem);
 router.delete("/item/:id", itemController.deleteItem);
 
