@@ -52,6 +52,7 @@ const eventController = {
 
    createEvent: async (req, res) => {
       try {
+         const userId = Number(req.user.id);
          const {
             title,
             date,
@@ -61,7 +62,6 @@ const eventController = {
             postal,
             password,
             image,
-            user_id,
          } = req.body;
 
          let bodyErrors = [];
@@ -86,9 +86,6 @@ const eventController = {
          if (!image) {
             bodyErrors.push(`image can not be empty`);
          }
-         if (!user_id) {
-            bodyErrors.push(`user_id can not be empty`);
-         }
 
          if (bodyErrors.length) {
             res.status(400).json(bodyErrors);
@@ -101,7 +98,7 @@ const eventController = {
                city,
                postal,
                image,
-               user_id,
+               user_id: userId,
             };
 
             if (password) {
