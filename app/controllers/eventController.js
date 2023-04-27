@@ -9,13 +9,14 @@ const eventController = {
          if (!event) {
             res.status(404).json("Cant find event with id " + eventId);
          } else {
-            if (event.password) {
+            if (event.password && event.user_id !== req.user.id) {
                if (!req.user) {
                   res.status(401).json(
                      "You need to be logged in to see this event"
                   );
                   return;
                }
+
                const userEvent = await UserEvent.findOne({
                   where: {
                      user_id: req.user.id,

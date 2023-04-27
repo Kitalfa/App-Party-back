@@ -1,4 +1,5 @@
 const { User, Event } = require("../models");
+const base64Img = require("base64-img");
 
 const userController = {
    getOneUser: async (req, res) => {
@@ -68,7 +69,30 @@ const userController = {
    modifyUser: async (req, res) => {
       try {
          const userId = req.params.id;
-         const { mail, lastname, firstname, password } = req.body;
+         const { mail, lastname, firstname, password, image } = req.body;
+
+         if (image) {
+            const image64 = {
+               filename: `img-profil-${firstname}`,
+               base64: image,
+            };
+
+            // Convertir la base64 en fichier image et l'enregistrer dans le dossier public
+            base64Img.img(
+               image64.base64,
+               "public",
+               image64.filename,
+               function (err, filepath) {
+                  if (err) {
+                     console.error(err);
+                  } else {
+                     console.log(
+                        `L'image a été enregistrée avec succès sous ${filepath}`
+                     );
+                  }
+               }
+            );
+         }
 
          let user = await User.findByPk(userId);
          if (!user) {
@@ -87,6 +111,9 @@ const userController = {
                user.password = password;
             }
 
+            if (image) {
+               user.image = `http://localhost:3000/public/img-profil-${firstname}.jpg`;
+            }
             await user.save();
             res.json(user);
          }
@@ -95,6 +122,40 @@ const userController = {
          res.status(500).json(error);
       }
    },
+   // modifyUser: async (req, res) => {
+   //    try {
+   //       const userId = req.params.id;
+   //       const { mail, lastname, firstname, password, image } = req.body;
+
+   //       let user = await User.findByPk(userId);
+   //       if (!user) {
+   //          res.status(404).json(`Cant find User with id ${userId}`);
+   //       } else {
+   //          if (mail) {
+   //             user.mail = mail;
+   //          }
+   //          if (lastname) {
+   //             user.lastname = lastname;
+   //          }
+   //          if (firstname) {
+   //             user.firstname = firstname;
+   //          }
+   //          if (password) {
+   //             user.password = password;
+   //          }
+
+   //          if (image) {
+   //             user.image = image;
+   //          }
+
+   //          await user.save();
+   //          res.json(user);
+   //       }
+   //    } catch (error) {
+   //       console.trace(error);
+   //       res.status(500).json(error);
+   //    }
+   // },
 
    deleteUser: async (req, res) => {
       try {

@@ -16,6 +16,7 @@ CREATE TABLE "user" (
   "lastname" VARCHAR(64) NOT NULL DEFAULT '',
   "firstname" VARCHAR(64) NOT NULL DEFAULT '',
   "password" VARCHAR(255) NOT NULL,
+  "image" TEXT NOT NULL DEFAULT '', 
   -- pour avoir la date et l'heure on utilise le type "timestamp", et pour être le plus précis possible on utilisera plutôt le type "timestampz" qui contient en plus de la date et de l'heure le fuseau horaire défini dans les locales du serveur
   "created_at" TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   "updated_at" TIMESTAMPTZ
