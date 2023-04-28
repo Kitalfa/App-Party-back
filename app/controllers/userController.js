@@ -1,6 +1,7 @@
 const { User, Event } = require("../models");
 const base64Img = require("base64-img");
 const fs = require("fs");
+const Jimp = require("jimp");
 
 const userController = {
    getOneUser: async (req, res) => {
@@ -74,14 +75,14 @@ const userController = {
 
          if (image) {
             const image64 = {
-               filename: `img-profil-${firstname}`,
+               filename: `img-profil-${mail}`,
                base64: image,
             };
             const user = await User.findByPk(userId);
 
             // Vérifier si l'utilisateur a une image existante
             if (user.image) {
-               const imagePath = `public/${user.image}`;
+               const imagePath = `public/${user.mail}`;
                // Supprimer l'ancienne image
                fs.unlink(imagePath, (err) => {
                   if (err) {
@@ -109,6 +110,30 @@ const userController = {
                   }
                }
             );
+
+            Jimp.read(`public/img-profil-${mail}.jpg`, function (err, image) {
+               //If there is an error in reading the image,
+               //we will print the error in our terminal
+               if (err) {
+                  console.log(err);
+               }
+               //Otherwise we convert the image into PNG format
+               //and save it inside images folder using write() method.
+               else {
+                  image.write(`public/img-profil-${mail}.png`);
+                  const imagePath = `public/img-profil-${mail}.jpg`;
+                  // Supprimer l'ancienne image
+                  fs.unlink(imagePath, (err) => {
+                     if (err) {
+                        console.error(err);
+                     } else {
+                        console.log(
+                           `L'image précédente a été supprimée: ${imagePath}`
+                        );
+                     }
+                  });
+               }
+            });
          }
 
          let user = await User.findByPk(userId);
@@ -129,7 +154,7 @@ const userController = {
             }
 
             if (image) {
-               user.image = `http://localhost:3000/public/img-profil-${firstname}.jpg`;
+               user.image = `http://localhost:3000/public/img-profil-${mail}.png`;
             }
             await user.save();
             res.json(user);
