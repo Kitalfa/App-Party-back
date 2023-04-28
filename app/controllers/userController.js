@@ -1,5 +1,6 @@
 const { User, Event } = require("../models");
 const base64Img = require("base64-img");
+const fs = require("fs");
 
 const userController = {
    getOneUser: async (req, res) => {
@@ -76,6 +77,22 @@ const userController = {
                filename: `img-profil-${firstname}`,
                base64: image,
             };
+            const user = await User.findByPk(userId);
+
+            // Vérifier si l'utilisateur a une image existante
+            if (user.image) {
+               const imagePath = `public/${user.image}`;
+               // Supprimer l'ancienne image
+               fs.unlink(imagePath, (err) => {
+                  if (err) {
+                     console.error(err);
+                  } else {
+                     console.log(
+                        `L'image précédente a été supprimée: ${imagePath}`
+                     );
+                  }
+               });
+            }
 
             // Convertir la base64 en fichier image et l'enregistrer dans le dossier public
             base64Img.img(
