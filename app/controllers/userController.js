@@ -1,4 +1,4 @@
-const { User, Event } = require("../models");
+const { User, Event, UserEvent } = require("../models");
 const base64Img = require("base64-img");
 const fs = require("fs");
 const Jimp = require("jimp");
@@ -218,15 +218,37 @@ const userController = {
    getEventsUser: async (req, res) => {
       try {
          const userId = Number(req.user.id);
-         const event = await Event.findAll({
+         const userEventsParticipating = await UserEvent.findAll(
+            {
+               where: {
+                  user_id: userId,
+               },
+            },
+            {
+               include: Event,
+            }
+         );
+
+         const eventsParticipating = [];
+
+         userEventsParticipating.forEach(async (event) => {
+            const eventParticipating = await Event.findByPk(
+               event.dataValues.EventId
+            );
+            eventsParticipating.push(eventParticipating);
+         });
+
+         const eventOwning = await Event.findAll({
             where: {
                user_id: userId,
             },
          });
-         if (!event) {
+
+         const events = [...eventsParticipating, ...eventOwning];
+         if (!events) {
             res.status(404).json("Cant find event with id " + userId);
          } else {
-            res.json(event);
+            res.json(events);
          }
       } catch (error) {
          res.status(500).json(error);
