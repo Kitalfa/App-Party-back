@@ -62,7 +62,7 @@ const eventController = {
             city,
             postal,
             password,
-            image,
+            //image,
          } = req.body;
 
          let bodyErrors = [];
@@ -84,9 +84,9 @@ const eventController = {
          if (!postal) {
             bodyErrors.push(`postal can not be empty`);
          }
-         if (!image) {
+         /* if (!image) {
             bodyErrors.push(`image can not be empty`);
-         }
+         } */
 
          if (bodyErrors.length) {
             res.status(400).json(bodyErrors);
@@ -98,7 +98,7 @@ const eventController = {
                address,
                city,
                postal,
-               image,
+               //image,
                user_id: userId,
             };
 
